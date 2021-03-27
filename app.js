@@ -1,6 +1,7 @@
 const express = require('express')
 var app = express()
 var PORT = 5000
+const pool = require('./db')
 
 /**
  * @method - GET

@@ -2,8 +2,10 @@ const express = require('express')
 var app = express()
 var PORT = 5000
 const pool = require('./db')
+const router = require('./populate_db/populate')
 
 app.use(express.json())
+app.use(router)
 
 /**
  * @method - GET

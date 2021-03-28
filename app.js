@@ -59,9 +59,14 @@ app.get('/customer/:customer_id', async(req, res) => {
  * @route - /customer/:customer_id
  * @description - Deletes Customer using the provided Customer ID
  */
-app.delete('/customer/:customer_id', (req, res) => {
+app.delete('/customer/:customer_id', async(req, res) => {
     try{
-
+        var customer_id = req.params.customer_id
+        var deleted_customer = await pool.query(
+            "DELETE FROM customer WHERE customer_id = $1 RETURNING *",
+            [customer_id]
+        )
+        res.json(deleted_customer.rows)
     }catch(e){
         console.log(e)
         res.status(500).send()
@@ -92,9 +97,14 @@ app.get('/orders/:order_id', async(req, res) => {
  * @route - /orders/:order_id
  * @description - The Homepage
  */
-app.delete('/orders/:order_id', (req, res) => {
+app.delete('/orders/:order_id', async(req, res) => {
     try{
-
+        var order_id = req.params.order_id
+        var deleted_order = await pool.query(
+            "DELETE FROM orders WHERE order_id = $1 RETURNING *",
+            [order_id]
+        )
+        res.json(deleted_order.rows)
     }catch(e){
         console.log(e)
         res.status(500).send()

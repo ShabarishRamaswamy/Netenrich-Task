@@ -15,9 +15,7 @@ CREATE TABLE orders(
     order_id SERIAL PRIMARY KEY,
     details VARCHAR(100),
     date DATE NOT NULL DEFAULT CURRENT_DATE,
-    -- state_name VARCHAR(30), DROPPED 
 	customer_id INT,
-    -- pin_code INT, DROPPED
     CONSTRAINT fk_customer
       FOREIGN KEY(customer_id) 
       REFERENCES customer(customer_id)

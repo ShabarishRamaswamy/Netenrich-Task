@@ -15,9 +15,9 @@ CREATE TABLE orders(
     order_id SERIAL PRIMARY KEY,
     details VARCHAR(100),
     date DATE NOT NULL DEFAULT CURRENT_DATE,
-    state_name VARCHAR(30),
+    -- state_name VARCHAR(30), DROPPED 
 	customer_id INT,
-    pin_code INT,
+    -- pin_code INT, DROPPED
     CONSTRAINT fk_customer
       FOREIGN KEY(customer_id) 
       REFERENCES customer(customer_id)
@@ -38,4 +38,43 @@ CREATE TABLE shipment(
       FOREIGN KEY(order_id) 
       REFERENCES orders(order_id)
       ON DELETE CASCADE
+);
+
+-- Intersion Statements
+
+INSERT INTO customer(
+	first_name, 
+	last_name,
+	area_name,
+	city,
+	state_name,
+	pin_code
+) VALUES (
+	'John',
+	'Doe',
+	'Mumbai Central',
+	'Mumbai',
+	'Maharastra',
+	455565
+);
+
+INSERT INTO orders(
+	details, 
+	date,
+    customer_id
+) VALUES (
+    'Android Phone',
+    '2021-03-25',
+    1
+);
+
+
+INSERT INTO shipment(
+	customer_id, 
+	order_id,
+    delivery
+) VALUES (
+    1,
+    1,
+    'On the go.'
 );

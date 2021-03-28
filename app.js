@@ -3,6 +3,8 @@ var app = express()
 var PORT = 5000
 const pool = require('./db')
 
+app.use(express.json())
+
 /**
  * @method - GET
  * @route - /

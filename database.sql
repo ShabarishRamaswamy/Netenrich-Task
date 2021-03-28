@@ -8,14 +8,15 @@ CREATE TABLE customer(
     area_name VARCHAR(30) NOT NULL,
     city VARCHAR(30) NOT NULL,
     state_name VARCHAR(30) NOT NULL,
-    pin_code INT NOT NULL,
+    pin_code INT NOT NULL
 );
 
-CREATE TABLE order(
+CREATE TABLE orders(
     order_id SERIAL PRIMARY KEY,
     details VARCHAR(100),
     date DATE NOT NULL DEFAULT CURRENT_DATE,
     state_name VARCHAR(30),
+	customer_id INT,
     pin_code INT,
     CONSTRAINT fk_customer
       FOREIGN KEY(customer_id) 
@@ -25,6 +26,8 @@ CREATE TABLE order(
 
 CREATE TABLE shipment(
     shipment_id SERIAL PRIMARY KEY,
+	customer_id INT,
+	order_id INT,
     delivery VARCHAR(100),
     date DATE NOT NULL DEFAULT CURRENT_DATE,
     CONSTRAINT fk_customer
@@ -33,6 +36,6 @@ CREATE TABLE shipment(
       ON DELETE CASCADE,
     CONSTRAINT fk_order
       FOREIGN KEY(order_id) 
-      REFERENCES order(order_id)
+      REFERENCES orders(order_id)
       ON DELETE CASCADE
 );
